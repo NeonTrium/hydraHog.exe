@@ -1,164 +1,72 @@
-# 🐗 hydraHog.exe  
-### _Cut one core, two shall rise._  
+# HydraHog 🐗🐍  
+*A Lightweight Windows System Stress-Testing Utility*
 
-![hydraHog banner](image.png)
+HydraHog is a Windows-only system stress-testing utility written in Python, designed to generate controlled CPU and RAM load on low-end or aging hardware. The tool was developed to study system behavior, process management, and performance limits in environments where modern benchmarking software is too resource-intensive to run reliably.
 
-> ⚠️ **This script is a chaotic digital entity. It inhales CPU & RAM like Chrome with 38 tabs and a superiority complex. Use it for mischief, memes, or modern-day justice.**
+## Why HydraHog?
 
----
+Modern stress-testing and benchmarking tools often assume relatively capable hardware. HydraHog was built specifically to operate on severely constrained systems (e.g., older laptops), allowing controlled experimentation without immediately destabilizing the machine.
 
-## 🤖 What It Actually Does
-- Can **auto-start on boot** (like a digital parasite)[^1]
-- Slowly chokes **RAM** and **CPU** to near-death (customizable).
-- Spams **fake system alerts** about your potato-tier hardware.
-- After a set time (default: 5 mins), it attempts a **BSOD**[^2]
-- If terminated from Task Manager? It **respawns like it’s in Dragon Ball**.
+The project focuses on:
+- Process lifecycle management
+- Memory pressure behavior
+- CPU scheduling under sustained load
+- System stability and thermal response
+- Performance overhead of user-space utilities
 
----
+## Key Features
 
-## 🔥 Features
-| 🔧 Feature           | 💬 Description                                                    |
-|---------------------|--------------------------------------------------------------------|
-| 📯 RAM Gobbler       | Eats memory like it’s on a cheat day.                             |
-| 🔥 CPU Overheat      | Your fans will beg for mercy.                                     |
-| 🧟‍♂️ Hydra Mode        | Kills one? Two return. You’re not ready.                         |
-| ⌨️ CTRL+ALT+P        | Pause the chaos if you get cold feet.                             |
-| ⌨️ CTRL+ALT+G        | Launches GUI. Because real hackers click buttons too.             |
-| 💣 BSOD Nuke         | Triggers an actual crash. Dramatic exits, anyone?                    |
-| 🤡 Fake Popups       | Passive-aggressive nags about your “hardware.”                    |
-| 🦠 Splash Screen     | ASCII logo that screams cursed retro vibes. Optional but iconic.  |
+- **Multi-Process CPU Stress**
+  - Configurable number of worker processes
+  - Adjustable CPU intensity via duty-cycle control
+  - Optional "Hydra Mode" that respawns workers if they terminate unexpectedly
 
----
+- **Controlled RAM Stress**
+  - Gradual memory allocation to avoid sudden system freezes
+  - Safety limits based on available system memory
 
-## 🧑‍💻 Installation
-```bash
-git clone https://github.com/hyprZona/hydraHog.exe.git
-cd hydraHog.exe
-python hydraHog.py
-```
-### Dependencies:
-```bash
-pip install pywin32
-```
-### Used Modules:
-```python
-os, ctypes, time, multiprocessing, threading,
-logging, random, win32con, win32gui,
-win32api, win32clipboard
-```
+- **Pause- and Duration-Aware Execution**
+  - Pause and resume stress tests without skewing results
+  - Automatic shutdown after a user-defined duration
 
-> 🧠 Pro Tip: Run it as admin for full features (BSOD won't work otherwise).
+- **System Telemetry**
+  - Real-time CPU and RAM usage
+  - CPU temperature monitoring (when supported by the system)
+  - Peak temperature tracking and thermal trend analysis
 
----
+- **Post-Test Evaluation**
+  - Stability assessment based on worker terminations
+  - Thermal performance summary
+  - Overall system stress score
 
-## 🧟 Add to Startup (a.k.a. Digital Haunting)
+- **Minimal Dependencies**
+  - Built using Python standard libraries, Tkinter, and `psutil`
+  - Suitable for older Windows systems
 
-> Be the reason someone fears restarting their PC.
+## Technical Overview
 
-### 1. Create Shortcut
+HydraHog uses Python’s multiprocessing module to spawn independent worker processes that generate CPU load through computation-heavy loops. Memory stress is applied through controlled allocation in a background thread to prevent UI blocking.
 
-  - Right-click the script or .exe → "Create Shortcut"
+System metrics are collected using `psutil`, which interfaces with operating system APIs to report resource usage and temperature data when available.
 
-### 2. Drop it in Startup
+The application includes a Tkinter-based GUI for configuration, monitoring, and logging.
 
-  - Press Win + R, type: shell:startup, hit Enter
-  
-  - Paste the shortcut there.
-  
-  - Boom. Eternal torment initiated.
+## Intended Use
 
----
+HydraHog is intended for:
+- Educational exploration of operating system behavior
+- Studying system stability under sustained load
+- Testing thermal and performance limits on older hardware
+- Demonstrating practical understanding of process and memory management
 
-## 🛠️ Compile to .exe (Disguise Level: Government Software)
-Wanna prank like a pro? Here’s how to make it look official:
+**Warning:** Running stress tests may cause system slowdowns or instability, especially on older machines. Use responsibly.
 
-### 1. Install PyInstaller
-```bash
-pip install pyinstaller
-```
-### 2. Build it
-```bash
-pyinstaller --noconfirm --onefile --windowed --icon=youricon.ico hydraHog.py
-```
-  - --windowed: Hides terminal window (stealth mode)
-  
-  - --icon: Confuse them with a Notepad icon or something cursed (you can download and use the icon in the repo)
-  
-  - --onefile: Clean single .exe output
-### 3. Copy the .exe from the dist/ folder and drop it into Startup for maximum chaos.
+## Requirements
 
----
+- Windows
+- Python 3.x
+- `psutil`
 
-## 🖼️ Icon Recommendation (aka “Meme Fuel”)
+## License
 
-![hydraHog logo](hydraHog.png)
-
-> Try using a random .ico like:
-> - **📝 Notepad**  
-> - **🧅 Tor Browser**
-> - **🐸 Pepe**
-> - **📀 WinRAR 2002 Edition**
-
-  **Confusion = Power.**
-
----
-
-## 🎭 Example Use Cases
-
-  - 💾 *Stress-test* a Sony Viao from 2011 (rip).
-
-  - 🤝 *Office warfare* against a dev who still uses IE11.
-
-  - 🤡 *April Fools*, but every time they reboot.
-
-  - 🧠 *Teach humility* to that friend who thinks 4GB RAM is “plenty.”
-
----
-
-## ❗ Warnings (Read this or suffer)
-  - ❌ This is not a virus, but Windows *might* disagree.
-
-  - 💣 Will hog resources to the edge of a breakdown. It’s the point.
-
-  - 🔐 Requires admin for BSOD powers.
-
-  - 🧯 Not meant for production systems. Unless you’re quitting that job anyway.
-
-  - 😇 Use responsibly. Or at least creatively.
-
----
-
-## 🕵️ Hotkeys
-
-| Combo            | Effect                           |
-| ---------------- | -------------------------------- |
-| `CTRL + ALT + P` | Pause / resume the chaos         |
-| `CTRL + ALT + G`       | For hacking vibes |
-
----
-
-## 🤝 Credits
-  - Brought to life by [dVlpr](https://github.com/hyprZona)
-
-  - Fueled by caffeine, spite, and memories of Internet Explorer
-
-  - Inspired by the RAM demons of Flash game days and that one cousin who installed 12 antiviruses
-
----
-
-## 🐗 Final Note and Legal
-
-> This tool is capable enough to *deep fry* your system like **GTA V in 2013**
-
-> We're totally *irresponsible* for **misuse** of this script
-
-> We wouldn't *pay a penny* incase your **system goes R.I.P.**
-
-> Incase of damages:
-
-![We warned you](https://c.tenor.com/HxESqpMBYt8AAAAd/tenor.gif)
-
----
-
-[^1]: Only if the script is added to Startup.
-[^2]: Only if BSOD is enabled and autokill is disabled.
+This project is provided for educational and experimental purposes.
