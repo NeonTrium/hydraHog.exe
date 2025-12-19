@@ -23,7 +23,7 @@ The project focuses on:
 
 - **Controlled RAM Stress**
   - Gradual memory allocation to avoid sudden system freezes
-  - Safety limits based on available system memory
+  - Safety warning based on user-allocated and maximum system memory
 
 - **Pause- and Duration-Aware Execution**
   - Pause and resume stress tests without skewing results
